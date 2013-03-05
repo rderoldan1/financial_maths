@@ -1,6 +1,6 @@
 # FinancialMaths
 
-TODO: Write a gem description
+more functions will be added soon
 
 ## Installation
 
