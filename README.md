@@ -2,6 +2,19 @@
 
 more functions will be added soon
 
+#### New in version 0.0.3
+
+   1. future_given_present
+   2. present_given_future
+   3. annuity_given_present
+   4. annuity_given_future
+   5. present_given_annuity(
+   6. future_given_annuity
+
+#### Pending
+   1. include more functions
+   3. add some test units
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -22,7 +35,6 @@ require "financial_maths"
 
 include FinancialMaths
 
-calculate = Credit.new
 ```
 
 ### Calculate Fixed payment equity
@@ -30,7 +42,7 @@ A credit in a period of 15 years, the amount is $100.000.000 and the interest is
 call the method following the next instruction.
 	
 ```ruby
-calculate.fixed_payment_equity(15,100000000,0.0144594763)
+fixed_payment_equity(15,100000000,0.0144594763)
 ```
 The result is a hash with the plan of payments, it looks like that
 	
@@ -42,6 +54,14 @@ The result is a hash with the plan of payments, it looks like that
 	.
 	]
 
+The lists of the methods and they params
+
+  future_given_present(present_value, interest, term)
+  present_given_future(future_value, interest, term)
+  annuity_given_present(present_value, interest, term)
+  annuity_given_future(future_value, interest, term)
+  present_given_annuity(annuity, interest, term)
+  future_given_annuity(annuity, interest, term)
 
 ## Contributing
 
