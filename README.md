@@ -2,13 +2,22 @@
 
 more functions will be added soon
 
+#### New in version 0.0.4
+
+   1. Amortization tables
+   2. efective_given_nominal_due(nominal_rate, term)
+   3. efective_given_nominal_antipipated
+   4. nominal_antipiated_given_efective
+   5. nominal_due_given_efective
+   6. anticipated_fixed_payment
+
 #### New in version 0.0.3
 
    1. future_given_present
    2. present_given_future
    3. annuity_given_present
    4. annuity_given_future
-   5. present_given_annuity(
+   5. present_given_annuity
    6. future_given_annuity
 
 #### Pending
@@ -42,7 +51,7 @@ A credit in a period of 15 years, the amount is $100.000.000 and the interest is
 call the method following the next instruction.
 	
 ```ruby
-fixed_payment_equity(15,100000000,0.0144594763)
+variable_payment_amortization(15,100000000,0.0144594763)
 ```
 The result is a hash with the plan of payments, it looks like that
 	
@@ -54,7 +63,7 @@ The result is a hash with the plan of payments, it looks like that
 	.
 	]
 
-The lists of the methods and they params
+The lists of the methods and their params
 
   future_given_present(present_value, interest, term)
   present_given_future(future_value, interest, term)
@@ -62,6 +71,14 @@ The lists of the methods and they params
   annuity_given_future(future_value, interest, term)
   present_given_annuity(annuity, interest, term)
   future_given_annuity(annuity, interest, term)
+  efective_given_nominal_due(nominal_rate, term)
+  efective_given_nominal_antipipated(nominal_rate, term)
+  nominal_antipiated_given_efective(nominal_rate, term)
+  nominal_due_given_efective(nominal_rate, term)
+  anticipated_fixed_payment(present_value, rate, term)
+
+  variable_payment_amortization(periods, amount, rate)
+  fixed_payment_amortization(periods, amount, rate, payment)
 
 ## Contributing
 
