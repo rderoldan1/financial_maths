@@ -1,5 +1,5 @@
 # FinancialMaths
-
+[![Build Status](https://travis-ci.org/rderoldan1/financial_maths.png?branch=master)](https://travis-ci.org/rderoldan1/financial_maths)
 more functions will be added soon
 
 #### New in version 0.0.4
