@@ -22,7 +22,7 @@ more functions will be added soon
 
 #### Pending
    1. include more functions
-   3. add some test units
+   3. add some unit tests
 
 ## Installation
 
