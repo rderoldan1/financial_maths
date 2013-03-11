@@ -9,3 +9,9 @@ describe "fixed payment test" do
 
   end
 end
+
+describe "variable payment test" do
+  it "should be the monthly variable payment" do
+    variable_payment(10000000.0,40).should eq(250000)
+  end
+end
