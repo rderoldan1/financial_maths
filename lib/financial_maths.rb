@@ -2,31 +2,66 @@ require "financial_maths/version"
 
 module FinancialMaths
 
-  def variable_payment_amortization(periods, amount, rate)
-
-    monthly_payments = amount/periods
+  def due_variable_payment_amortization(periods, amount, rate,  payment)
     result = []
     result << {:period=> 0, :monthly_payment => nil, :interest => nil, :payment => nil, :balance => amount}
 
     for i in 1..periods
       interest = amount * rate
-      month_payment = monthly_payments + interest
-      amount -= monthly_payments
+      month_payment = payment + interest
+      amount -= payment
       #date += 1
       result << {:period=> i,
                  :payment => month_payment,
                  :interest => interest,
-                 :monthly_payment => monthly_payments,
+                 :monthly_payment => payment,
                  :balance => amount}
     end
     result
   end
 
-  def fixed_payment_amortization(periods, amount, rate, payment)
+  def anticipated_variable_payment_amortization(periods, amount, rate,  payment)
+        result = []
+    #result << {:period=> 0, :monthly_payment => nil, :interest => nil, :payment => nil, :balance => amount}
+
+    for i in 0..periods-1
+      interest = amount * rate
+      month_payment = payment + interest
+      amount -= payment
+      #date += 1
+      result << {:period=> i,
+                 :payment => month_payment,
+                 :interest => interest,
+                 :monthly_payment => payment,
+                 :balance => amount}
+    end
+    result
+  end
+
+
+  def due_fixed_payment_amortization(periods, amount, rate, payment)
     result = []
     result << {:period=> 0, :monthly_payment => nil, :interest => nil, :payment => nil, :balance => amount}
 
     for i in 1..periods
+      interest = amount * rate
+      month_payment = payment - interest
+      amount -= month_payment
+      #date += 1
+      result << {:period=> i,
+                 :payment => payment,
+                 :interest => interest,
+                 :monthly_payment => month_payment,
+                 :balance => amount}
+    end
+    result
+  end
+
+  def anticipated_fixed_payment_amortization(periods, amount, rate, payment)
+    result = []
+    #result << {:period=> 0, :monthly_payment => nil, :interest => nil, :payment => nil, :balance => amount}
+
+    for i in 0..periods-1
       interest = amount * rate
       month_payment = payment - interest
       amount -= month_payment
@@ -74,25 +109,29 @@ module FinancialMaths
   # hallar tasa efectiva dado la tasa nominal vencida  NVEF
   def efective_given_nominal_due(nominal_rate, term)
     (((1 + nominal_rate.to_f) ** term)-1).round(4)
-    end
+  end
 
-    # hallar tasa efectiva dado la tasa nominal anticipada    NAEF
-    def efective_given_nominal_antipipated(nominal_rate, term)
-      (1 / ((1 -  nominal_rate.to_f) ** term)).round(4) - 1
-    end
+  # hallar tasa efectiva dado la tasa nominal anticipada    NAEF
+  def efective_given_nominal_antipipated(nominal_rate, term)
+    (1 / ((1 -  nominal_rate.to_f) ** term)).round(4) - 1
+  end
 
-    # hallar tasa nominal anticipada dado efectiva   EFNV
-    def nominal_antipiated_given_efective(nominal_rate, term)
-      (1 - (1 / (1 +  nominal_rate.to_f) ** (1 / term))).round(4)
-    end
+  # hallar tasa nominal anticipada dado efectiva   EFNV
+  def nominal_antipiated_given_efective(nominal_rate, term)
+    (1 - (1 / (1 +  nominal_rate.to_f) ** (1 / term))).round(4)
+  end
 
-    # hallar tasa nominal anticipada dado efectiva   EFNV
-    def nominal_due_given_efective(nominal_rate, term)
-      ((nominal_rate.to_f + 1) ** (1 / term)).round(4)
-    end
-    # Hallar la cuota fija anticipada   HCFA
-    def anticipated_fixed_payment(present_value, rate, term)
-      ((present_value.to_f * rate.to_f) / ((rate.to_f + 1) - (1 / (1 + rate) ** (term - 1)))).round(4)
+  # hallar tasa nominal anticipada dado efectiva   EFNV
+  def nominal_due_given_efective(nominal_rate, term)
+    ((nominal_rate.to_f + 1) ** (1 / term)).round(4)
+  end
+  # Hallar la cuota fija anticipada   HCFA
+  def anticipated_fixed_payment(present_value, rate, term)
+    ((present_value.to_f * rate.to_f) / ((rate.to_f + 1) - (1 / (1 + rate) ** (term - 1)))).round(4)
+  end
+
+  def variable_payment(amount, periods)
+    amount.to_f / periods
   end
 
 
