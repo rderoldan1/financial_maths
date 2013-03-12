@@ -59,9 +59,6 @@ anticipated_variable_payment_amortization (periods, amount, rate, payment)
 #### Amortization with fixed payment due
 due_fixed_payment_amortization (periods, amount, rate, payment)
 
-#### Variable payment amortization anticipated
-anticipated_fixed_payment_amortization (periods, amount, rate, payment)
-
     $ due_fixed_payment_amortization(5,10000,1.8,2109)
     $ [{:period=>0, :monthly_payment=>nil, :interest=>nil, :payment=>nil, :balance=>10000},
       {:period=>1, :payment=>2109, :interest=>18000.0, :monthly_payment=>-15891.0, :balance=>25891.0},
@@ -69,6 +66,11 @@ anticipated_fixed_payment_amortization (periods, amount, rate, payment)
       {:period=>3, :payment=>2109, :interest=>126694.44, :monthly_payment=>-124585.44, :balance=>194971.24},
       {:period=>4, :payment=>2109, :interest=>350948.232, :monthly_payment=>-348839.232, :balance=>543810.4720000001},
       {:period=>5, :payment=>2109, :interest=>978858.8496000002, :monthly_payment=>-976749.8496000002, :balance=>1520560.3216000004}]
+
+
+#### Variable payment amortization anticipated
+anticipated_fixed_payment_amortization (periods, amount, rate, payment)
+
 
 #### Find future given the present value
 future_given_present (present_value, interest, term)
