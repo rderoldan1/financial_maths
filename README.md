@@ -1,6 +1,8 @@
-## FinancialMaths [![Build Status](https://travis-ci.org/rderoldan1/financial_maths.png?branch=master)](https://travis-ci.org/rderoldan1/financial_maths)
+## FinancialMaths
+[![Build Status](https://travis-ci.org/rderoldan1/financial_maths.png?branch=master)](https://travis-ci.org/rderoldan1/financial_maths)
 [![Coverage Status](https://coveralls.io/repos/rderoldan1/financial_maths/badge.png?branch=master)](https://coveralls.io/r/rderoldan1/financial_maths)
 [![Gem Version](https://badge.fury.io/rb/financial_maths.png)](http://badge.fury.io/rb/financial_maths)
+
 more functions will be added soon
 
 #### New in version 0.0.5
