@@ -6,8 +6,8 @@ require 'financial_maths/version'
 Gem::Specification.new do |spec|
   spec.name          = "financial_maths"
   spec.version       = FinancialMaths::VERSION
-  spec.authors       = ["Ruben Espinosa"]
-  spec.email         = ["rderoldan1@gmail.com"]
+  spec.authors       = ["Ruben Espinosa", "Mateo Vidal"]
+  spec.email         = ["rderoldan1@gmail.com", "jvidalba@gmail.com"]
   spec.description   = %q{gem to use financial methods inside ruby}
   spec.summary       = %q{calculate loan payments and other things}
   spec.homepage      = "https://github.com/rderoldan1/financial_maths"
