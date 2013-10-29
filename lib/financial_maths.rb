@@ -121,6 +121,18 @@ module FinancialMaths
     def efective_given_nominal_anticipated(nominal_rate, term)
       (((1/((1-((nominal_rate.to_f/100)/term))**term))-1)*100).round(4)
     end
+    
+    ##
+    # Description:  Find nominal rate anticipated given effective rate - EFNV
+    # Formulas:      
+    #               nominalRate   = (1 + EFFECTIVE RATE)^(1 / PERIODS) - 1
+    #               toAnticipated =  nominalRate / 1 + nominalRate
+    #               Returned      -> toAnticipated * PERIODS
+    def nominal_anticipated_given_efective(effective_rate, periods)
+      nominalRate = (1+(effective_rate.to_f/100))**(1/periods.to_f)-1;
+      toAnticipated = nominalRate / (1+nominalRate)
+      (toAnticipated * periods.to_f * 100).round(4)     
+    end
   
   # == End conversion rates
   
