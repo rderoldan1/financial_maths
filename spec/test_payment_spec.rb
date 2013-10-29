@@ -37,3 +37,30 @@ describe "anticipated fixed payment amortization" do
   end
 end
 
+describe "conversion rates" do
+  describe "Find effective rate given nominal rate expired" do
+    it "should be the respective rate in effective format" do 
+      efective_given_nominal_due(15,12).should eql(16.0755)
+    end
+  end
+  
+  describe "Find effective rate given anticipated nominal rate" do
+    it "should be the respective rate in effective format" do 
+      nominal_anticipated_given_efective(15,12).should eql(13.8951)
+    end
+  end 
+  
+  describe "Find nominal rate anticipated given effective rate" do
+    it "should be the respective rate in nominal format" do 
+      nominal_due_given_efective(15,12).should eql(14.0579)
+    end
+  end
+  
+  describe "Find nominal rate expired given effective rate" do
+    it "should be the respective rate in nominal format" do 
+      efective_given_nominal_anticipated(15,12).should eql(16.2933)
+    end
+  end 
+end
+
+
