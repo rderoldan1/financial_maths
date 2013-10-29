@@ -133,6 +133,13 @@ module FinancialMaths
       toAnticipated = nominalRate / (1+nominalRate)
       (toAnticipated * periods.to_f * 100).round(4)     
     end
+    
+    ##
+    # Description:  Find nominal rate expired given effective rate - EFNV
+    # Formula:      ((1 + EFFECTIVE RATE) ^ (1 / PERIODS) - 1)* PERIODS
+    def nominal_due_given_efective(effective_rate, periods)    
+      ((((1 + (effective_rate.to_f/100))**(1/periods.to_f)-1)*periods.to_f)*100).round(4)    
+    end
   
   # == End conversion rates
   
