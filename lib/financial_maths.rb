@@ -114,6 +114,13 @@ module FinancialMaths
     def efective_given_nominal_due(nominal_rate, term)
       ((((1+((nominal_rate.to_f/100)/term))**term)-1).round(6))*100
     end
+    
+    ##
+    # Description:  Find effective rate given anticipated nominal rate - NAEF
+    # Formula:      ((1 / ((1- (NOMINAL RATE / PERIODS)) ^ PERIODS)) -1
+    def efective_given_nominal_anticipated(nominal_rate, term)
+      (((1/((1-((nominal_rate.to_f/100)/term))**term))-1)*100).round(4)
+    end
   
   # == End conversion rates
   
