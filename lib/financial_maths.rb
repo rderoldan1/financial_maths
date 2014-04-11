@@ -135,17 +135,25 @@ module FinancialMaths
     end
     
     ##
-    # Description:  Find nominal rate expired given effective rate - EFNV
+    # Description:  Find nominal rate expired given effective rate - HCUA
     # Formula:      ((1 + EFFECTIVE RATE) ^ (1 / PERIODS) - 1)* PERIODS
-    def nominal_due_given_efective(effective_rate, periods)    
-      ((((1 + (effective_rate.to_f/100))**(1/periods.to_f)-1)*periods.to_f)*100).round(4)    
+    def nominal_due_given_efective(effective_rate, periods)
+			((((1 + (effective_rate.to_f/100))**(1/periods.to_f)-1)*periods.to_f)*100).round(4)
     end
-  
+
+		##
+		# Description:  Find nominal rate expired given effective rate - EFNV
+		# Formula:      (1 - ((1 / (TASA EFECTIVA + 1))^(1/PERIODOS))
+		def anticipated_interest(rate, periods)
+		  (1 - (( 1 / ( rate.to_f + 1 )) ** (1 / periods)))
+		end
+
   # == End conversion rates
   
   # Hallar la cuota fija anticipada   HCFA
   def anticipated_fixed_payment(present_value, rate, term)
-    ((present_value.to_f * rate.to_f) / ((rate.to_f + 1) - (1 / (1 + rate) ** (term - 1)))).round(4)
+		a_rate = anticipated_interest(rate, term)
+    ((present_value.to_f * a_rate.to_f) / ((a_rate.to_f + 1) - (1 / (1 + a_rate) ** (term - 1)))).round(4)
   end
 
   def variable_payment(amount, periods)
