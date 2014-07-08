@@ -1,3 +1,3 @@
 module FinancialMaths
-  VERSION = "0.0.9"
+  VERSION = "0.0.10"
 end
