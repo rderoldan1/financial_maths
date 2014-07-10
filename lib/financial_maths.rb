@@ -59,11 +59,13 @@ module FinancialMaths
 
   def anticipated_fixed_payment_amortization(periods, amount, rate, payment)
     result = []
-    #result << {:period=> 0, :monthly_payment => nil, :interest => nil, :payment => nil, :balance => amount}
+    result << {:period=> 0, :monthly_payment => nil,
+               :interest => amount * rate, :payment => nil,
+               :balance => amount}
 
-    for i in 0..periods-1
-      interest = amount * rate
-      month_payment = payment - interest
+    for i in 1..periods
+      month_payment = payment * ((1-rate) ** (periods - i))
+      interest = payment - month_payment
       amount -= month_payment
       #date += 1
       result << {:period=> i,
@@ -107,33 +109,33 @@ module FinancialMaths
   end
 
   # == Conversion rates
-  
-    ## 
+
+    ##
     # Description:  Find effective rate given nominal rate expired - NVEF
     # Formula:      ((1 + (NOMINAL RATE / PERIODS)) ^ PERIODS) - 1
     def efective_given_nominal_due(nominal_rate, term)
       ((((1+((nominal_rate.to_f/100)/term))**term)-1).round(6))*100
     end
-    
+
     ##
     # Description:  Find effective rate given anticipated nominal rate - NAEF
     # Formula:      ((1 / ((1- (NOMINAL RATE / PERIODS)) ^ PERIODS)) -1
     def efective_given_nominal_anticipated(nominal_rate, term)
       (((1/((1-((nominal_rate.to_f/100)/term))**term))-1)*100).round(4)
     end
-    
+
     ##
     # Description:  Find nominal rate anticipated given effective rate - EFNV
-    # Formulas:      
+    # Formulas:
     #               nominalRate   = (1 + EFFECTIVE RATE)^(1 / PERIODS) - 1
     #               toAnticipated =  nominalRate / 1 + nominalRate
     #               Returned      -> toAnticipated * PERIODS
     def nominal_anticipated_given_efective(effective_rate, periods)
       nominalRate = (1+(effective_rate.to_f/100))**(1/periods.to_f)-1
       toAnticipated = nominalRate / (1+nominalRate)
-      (toAnticipated * periods.to_f * 100).round(4)     
+      (toAnticipated * periods.to_f * 100).round(4)
     end
-    
+
     ##
     # Description:  Find nominal rate expired given effective rate - HCUA
     # Formula:      ((1 + EFFECTIVE RATE) ^ (1 / PERIODS) - 1)* PERIODS
@@ -149,11 +151,10 @@ module FinancialMaths
 		end
 
   # == End conversion rates
-  
+
   # Hallar la cuota fija anticipada   HCFA
   def anticipated_fixed_payment(present_value, rate, term)
-		a_rate = anticipated_interest(rate, term)
-    ((present_value.to_f * a_rate.to_f) / ((a_rate.to_f + 1) - (1 / (1 + a_rate) ** (term - 1)))).round(4)
+		((present_value.to_f) / ((1 - (1 - rate.to_f ) ** term ) / rate.to_f )).round(4)
   end
 
   def variable_payment(amount, periods)
@@ -161,5 +162,3 @@ module FinancialMaths
   end
 
 end
-
-
