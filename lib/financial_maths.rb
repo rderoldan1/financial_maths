@@ -7,10 +7,15 @@ module FinancialMaths
     result << {:period=> 0, :monthly_payment => nil, :interest => nil, :payment => nil, :balance => amount}
 
     for i in 1..periods
-      interest = amount * rate
-      month_payment = payment + interest
-      amount -= payment
-      #date += 1
+      if i == periods
+        interest = month_payment * rate
+        month_payment = payment + interest
+        amount -= payment
+      else
+        interest = amount * rate
+        month_payment = payment + interest
+        amount -= payment
+      end
       result << {:period=> i,
                  :payment => month_payment,
                  :interest => interest,
@@ -25,10 +30,16 @@ module FinancialMaths
     #result << {:period=> 0, :monthly_payment => nil, :interest => nil, :payment => nil, :balance => amount}
 
     for i in 0..periods-1
-      interest = amount * rate
-      month_payment = payment + interest
-      amount -= payment
-      #date += 1
+      if i == periods
+        interest = month_payment * rate
+        month_payment = payment + interest
+        amount -= payment
+      else
+        interest = amount * rate
+        month_payment = payment + interest
+        amount -= payment
+      end
+
       result << {:period=> i,
                  :payment => month_payment,
                  :interest => interest,
@@ -44,10 +55,16 @@ module FinancialMaths
     result << {:period=> 0, :monthly_payment => nil, :interest => nil, :payment => nil, :balance => amount}
 
     for i in 1..periods
-      interest = amount * rate
-      month_payment = payment - interest
-      amount -= month_payment
-      #date += 1
+      if i == periods
+        interest = month_payment * rate
+        month_payment = payment - interest
+        amount -= payment
+      else
+        interest = amount * rate
+        month_payment = payment - interest
+        amount -= payment
+      end
+
       result << {:period=> i,
                  :payment => payment,
                  :interest => interest,
