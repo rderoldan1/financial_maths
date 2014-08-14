@@ -89,6 +89,41 @@ module FinancialMaths
     end
     result
   end
+  
+  def due_interest_amortization(periods, amount, rate)
+    result = []
+    result << {:period=> 0, :monthly_payment => nil, :interest => nil, :payment => nil, :balance => amount}
+    
+    for i in 1..(periods - 1) do  
+      result << {period: i, monthly_payment: 0, interest: (amount * rate), payment: (amount * rate), balance: amount}
+    end 
+
+    result << {period: periods, monthly_payment: amount , interest: amount * rate, payment: amount * rate + amount, balance: 0}
+  end 
+  
+  def anticipated_interest_amortization(periods, amount, rate)
+    result = []
+  
+    for i in 0..(periods - 2) do  
+      result << {period: i, monthly_payment: 0, interest: (amount * rate), payment: (amount * rate), balance: 0}
+    end 
+
+    result << {period: periods - 1, monthly_payment: amount , interest: amount * rate, payment: amount * rate + amount, balance: 0}
+  end 
+  
+  def unique_payment_amortization(periods, amount, rate)
+    result = []
+    result << {:period=> 0, :monthly_payment => nil, :interest => nil, :payment => nil, :balance => amount}
+    
+    interest = (amount * rate) * periods
+    
+    for i in 1..(periods - 1) do  
+      result << {:period=> i, :monthly_payment => 0, :interest => 0, :payment => 0, :balance => amount}
+    end 
+    
+    result << {:period=> periods, :monthly_payment => amount, :interest => interest, :payment => amount + interest , :balance => 0}
+  end 
+    
 
   # hallar futuro dado el valor presente    HFDP
   def future_given_present(present_value, interest, term)
